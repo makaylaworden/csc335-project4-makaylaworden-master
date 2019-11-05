@@ -40,7 +40,7 @@ public class CryptogramTextView implements java.util.Observer{
             } else if (command.equals("FREQ")) { // Gives frequency of letters
                 System.out.println(cryptCont.frequey());
             } else if (command.equals("HINT")) { // Hints one letter mapping
-                giveHint();
+                cryptCont.giveHint();
             } else if (command.equals("HELP")) { // Prints commands
                 needHelp();
             } else { // if they type something wacko
@@ -80,25 +80,6 @@ public class CryptogramTextView implements java.util.Observer{
         System.out.println("hint – display one correct mapping that has not yet been guessed.");
         System.out.println("exit – Ends the game early.");
         System.out.println("help – List these commands.");
-    }
-    /**
-     * giveHint hints a mapping for the user to help them guess. Done by
-     * getting a random index, seeing if they guessed the value at that
-     * index, going again if they have, then printing a guess.
-     */
-    public void giveHint(){
-        if (cryptmod.getCipherMap().keySet().size() > 0) {
-            Object[] keySet = cryptmod.getCipherMap().keySet().toArray();
-            Random rand = new Random();
-            int i = rand.nextInt(keySet.length);
-            String k = keySet[i].toString();
-            System.out.println();
-            while (cryptmod.getGuessStr().contains(k)) {
-                i = rand.nextInt(keySet.length);
-                k = keySet[i].toString();
-            }
-            System.out.print(cryptmod.getCipherMap().get(k) + " encrypts " + k + "\n"); // This is the hint
-        }
     }
     /**
      * This updates guessStr to be the users latest guess.

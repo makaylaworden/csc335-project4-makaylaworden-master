@@ -154,4 +154,23 @@ public class CryptogramController {
         }
         return values;
     }
+    /**
+     * giveHint hints a mapping for the user to help them guess. Done by
+     * getting a random index, seeing if they guessed the value at that
+     * index, going again if they have, then printing a guess to the console.
+     */
+    public void giveHint(){
+        if (cryptMod.getCipherMap().keySet().size() > 0) {
+            Object[] keySet = cryptMod.getCipherMap().keySet().toArray();
+            Random rand = new Random();
+            int i = rand.nextInt(keySet.length);
+            String k = keySet[i].toString();
+            System.out.println();
+            while (cryptMod.getGuessStr().contains(k)) {
+                i = rand.nextInt(keySet.length);
+                k = keySet[i].toString();
+            }
+            System.out.print(cryptMod.getCipherMap().get(k) + " encrypts " + k + "\n"); // This is the hint
+        }
+    }
 }

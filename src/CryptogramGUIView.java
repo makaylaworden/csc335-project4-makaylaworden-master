@@ -23,6 +23,7 @@ import java.util.Observable;
  * a GUI to show the user what they're guesses turn into.
  */
 public class CryptogramGUIView extends Application implements java.util.Observer {
+    private Stage primaryStage;
     private static CryptogramController cryptCont;
     public static void main(String[] args){
         cryptCont = new CryptogramController();
@@ -35,6 +36,7 @@ public class CryptogramGUIView extends Application implements java.util.Observer
      */
     @Override
     public void start (Stage primaryStage) {
+        this.primaryStage = primaryStage;
         primaryStage.setTitle("Cryptograms");
         BorderPane border = new BorderPane(); // screen layout
         VBox vBox = new VBox(); // Right col
@@ -46,7 +48,6 @@ public class CryptogramGUIView extends Application implements java.util.Observer
 
         border.setRight(vBox);
         border.setCenter(game);
-
 
         Scene scene = new Scene(border, 900, 400);
 
@@ -66,15 +67,14 @@ public class CryptogramGUIView extends Application implements java.util.Observer
         Button newGame = new Button();
         newGame.setText("New Puzzle");
         newGame.setOnAction(event -> {
-            //TODO: Start a new game
-            System.out.println("WIPE OUT");
+            cryptCont = new CryptogramController();
+            start(primaryStage);
         });
 
         Button giveHint = new Button();
         giveHint.setText("Hint");
         giveHint.setOnAction(event -> {
-            // TODO: fill in boxes with hint
-            System.out.println("hint hint ;)");
+            cryptCont.giveHint(); // Prints hint to the console
         });
 
         CheckBox cBox = new CheckBox("Show Freq");
