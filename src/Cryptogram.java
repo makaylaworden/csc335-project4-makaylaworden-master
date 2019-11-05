@@ -18,8 +18,7 @@ public class Cryptogram {
 
         System.out.print("Please enter '-text' or '-window': ");
         Scanner input = new Scanner(System.in);
-        //String command = input.nextLine().toLowerCase();
-        String command = "-window";
+        String command = input.nextLine().toLowerCase();
         if (command.equals("-text"))
             textView.getCommand();
         else if (command.equals("-window"))
